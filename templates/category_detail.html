@@ -1,0 +1,14 @@
+{% extends "layout.html" %} {% block body %}
+    <ul class="mdc-list" aria-orientation="vertical">   
+        {% for item in object['items'] %}
+        <li class="mdc-list-item">
+            <span class="mdc-list-item__graphic">
+                <i class="material-icons">
+                    directions_car
+                </i>
+            </span>
+            <a href="{{object.slug}}/{{item.slug}}">{{item.name}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

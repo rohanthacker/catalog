@@ -4,13 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
-    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js" />
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Document</title>
+    <style>
+        html, body {
+            margin: 0;
+            background-color: #e6e6e6;
+        }
+        .main {
+            max-width: 80%;
+            margin: 0 auto;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
 
-    {% block body %}{% endblock %}
+    <header class="mdc-toolbar">
+        <div class="mdc-toolbar__row">
+            <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+                <span class="mdc-toolbar__title">{% block title %} Home {% endblock %}</span>
+            </section>
 
+            <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+                <div class="mdc-menu" tabindex="-1">
+                    <ul class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                            A Menu Item
+                        </li>
+                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                            Another Menu Item
+                        </li>
+                    </ul>
+                </div>
+
+                {% if not session.logged_in %}
+                <a href="{{ url_for('login') }}">log in</a>
+                {% else %}
+                <a href="{{ url_for('logout') }}">logout</a>
+                {% endif %}
+            </section>
+        </div>
+    </header>
+    
+<div class="main mdc-card">
+    {% block body %}{% endblock %}
+</div>
+    
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script>
+        mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button'));
+    </script>
 </body>
 </html>

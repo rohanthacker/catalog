@@ -13,6 +13,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(80), nullable=False)
+    hashed_password = Column(String(80), nullable=False)
 
 
 class Category(Base):
@@ -21,6 +22,7 @@ class Category(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(80), nullable=False)
+    slug = Column(String(80), nullable=False)
 
 
 class Item(Base):
@@ -29,4 +31,5 @@ class Item(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(80), nullable=False)
-    # category = relationship(Category)
+    category = Column(String(80), nullable=False)
+    slug = Column(String(80), nullable=False)

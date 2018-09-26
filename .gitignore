@@ -4,3 +4,7 @@
 
 # Python venv
 venv
+
+# Frontend Files
+static/node_modules
+

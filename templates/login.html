@@ -1,12 +1,35 @@
-<!-- {% extends "layout.html" %}  -->
+{% extends "base.html" %} 
 
-<!-- {% block body %} -->
+{% block body %}
 
-<h1>Login</h1>
-<form action="/login/" method="POST">
-    <div><input name="username" autocomplete="username" type="text"></div>
-    <div><input name="password" autocomplete="current-password" type="password"></div>
-    <div><button>Submit</button></div>
-</form>
+    <div class="mdc-card login-card">
+        <h1 class="mdc-typography--headline4">Login</h1>
+        <div class="login-card__content">
+        <form name="login" action="/login/" method="POST">
+            <div>
+                
+                <div class="mdc-text-field">
+                    <input type="text" id="my-text-field" class="mdc-text-field__input">
+                    <label class="mdc-floating-label" for="my-text-field">Username</label>
+                    <div class="mdc-line-ripple"></div>
+                </div>
+            </div>
+            <div>
+                <div class="mdc-text-field">
+                    <input type="password" id="my-text-field" class="mdc-text-field__input">
+                    <label class="mdc-floating-label" for="my-text-field">Password</label>
+                    <div class="mdc-line-ripple"></div>
+                </div>
+            </div>
+        </form>
+        </div>
 
-<!-- {% endblock %} -->
+        <div class="mdc-card__actions">
+            <div class="mdc-card__action-buttons">
+                <button class="mdc-button mdc-card__action mdc-card__action--button">Login</button>
+                <button class="mdc-button mdc-card__action mdc-card__action--button">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
