@@ -3,16 +3,15 @@
 {% block title %} Ford {% endblock %}
 
 {% block body %}
-    <ul class="mdc-list" aria-orientation="vertical">
-        {% for item in objects %}
-            <li class="mdc-list-item">
-                <span class="mdc-list-item__graphic">
-                    <i class="material-icons">
-                        category
-                    </i>
-                </span>
-                <a href="{{item.slug}}">{{item.name}}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="row">
+        <div class="col col-4">
+            <ul class="list-group">
+                {% for item in objects %}
+                <li class="list-group-item">
+                    <a href="{{item.slug}}">{{item.name}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 {% endblock %}
