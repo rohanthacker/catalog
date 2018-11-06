@@ -32,6 +32,7 @@ class LoginView(View):
         return render_template(self.get_template_name(), **context)
 
     def authenticate(self, username, password):
+        # TODO: Check creds with DB
         hashed_password = b'$2b$12$Fll4TLljj7dYmJMeC5jb2e5ilmj4JGpkbkiMeQo7tk.vNCe6HVewi'
         if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
             a_session['username'] = username
