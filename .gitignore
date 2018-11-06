@@ -6,5 +6,4 @@
 venv
 
 # Frontend Files
-static/node_modules
-
+static/node_modules/**
