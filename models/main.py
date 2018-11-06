@@ -24,6 +24,13 @@ class Category(Base):
     name = Column(String(80), nullable=False)
     slug = Column(String(80), nullable=False)
 
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'slug': self.slug
+        }
+
 
 class Item(Base):
 

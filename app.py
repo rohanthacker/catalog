@@ -3,10 +3,11 @@ from flask import Flask
 from views.auth import LoginView, LogoutView
 from views.category import CategoryListView, CategoryDetailView
 from views.item import ItemDetailView, ItemCreateView
-
+from views.API import APIView
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+app.config["DEBUG"] = True
 
 # App Routes
 # app.add_url_rule('/', view_func=ShowUsers.as_view('show_users'))
@@ -31,3 +32,7 @@ app.add_url_rule('/categories/<category_pk>/add',
 
 app.add_url_rule('/categories/<category_pk>/<item_pk>/delete',
                  view_func=ItemDetailView.as_view('delete_item'))
+
+# API Routes
+app.add_url_rule(
+    '/api/v1/categories/', view_func=APIView.as_view('api_list_categories'))
