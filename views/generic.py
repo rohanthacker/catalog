@@ -1,5 +1,5 @@
 import bcrypt
-from flask import request, render_template
+from flask import request, render_template, redirect
 from flask.views import View
 from models.main import User
 from models.session import session
@@ -8,10 +8,6 @@ from flask import session as a_session
 
 class TemplateView(View):
     template_name = None
-
-    def logout(self):
-        a_session.pop('username', None)
-        a_session.pop('logged_in', False)
 
     def render_template(self):
         return render_template(self.template_name)
@@ -23,6 +19,8 @@ class TemplateView(View):
 
 class LoginView(View):
     methods = ['GET', 'POST']
+    redirect_url = '/categories/'
+    template_name = 'login.html'
 
     def get_user(self):
         return session.query(User).first()
@@ -30,20 +28,30 @@ class LoginView(View):
     def get_template_name(self):
         raise NotImplementedError()
 
-    def render_template(self, context):
+    def render_template(self, context={}):
         return render_template(self.get_template_name(), **context)
 
     def authenticate(self, username, password):
         hashed_password = b'$2b$12$Fll4TLljj7dYmJMeC5jb2e5ilmj4JGpkbkiMeQo7tk.vNCe6HVewi'
-        if bcrypt.checkpw(password, hashed_password):
+        if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
             a_session['username'] = username
             a_session['logged_in'] = True
+            return True
 
     def dispatch_request(self):
         if request.method == 'POST':
-            self.authenticate('rohan', b'6999')
-        context = {'objects': []}
-        return self.render_template(context)
+            if self.authenticate(request.form.get('username'), request.form.get('password')):
+                return redirect(self.redirect_url)
+        else:
+            return self.render_template()
+
+
+class LogoutView(TemplateView):
+    template_name = 'logout.html'
+
+    def dispatch_request(self):
+        a_session.clear()
+        return self.render_template()
 
 
 class ListView(TemplateView):
@@ -71,9 +79,9 @@ class DetailView(TemplateView):
         return render_template(self.template_name, **context)
 
 
-class CreateView(View):
+class CreateView(TemplateView):
     pass
 
 
-class DeleteView(View):
+class DeleteView(TemplateView):
     pass
