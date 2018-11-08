@@ -13,8 +13,11 @@ class TemplateView(View):
         return render_template(self.template_name)
 
     def dispatch_request(self):
-        self.logout()
         return self.render_template()
+
+
+class IndexView(TemplateView):
+    template_name = 'index.html'
 
 
 class LoginView(View):
