@@ -5,15 +5,12 @@
 
 
 {% block body %}
-<div class="row">
-    <div class="col col-4">
-        <ul class="list-group">
+        <ul class="grid">
             {% for item in objects %}
-            <li class="list-group-item">
+            <li class="grid-item">
+                <img src="/static/images/placeholder.jpg" alt="">
                 <a href="{{item.slug}}">{{item.name}}</a>
             </li>
             {% endfor %}
         </ul>
-    </div>
-</div>
 {% endblock %}
