@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% import "macros.jinja" as macros %}
+
+{% block title %} {{context['object']['name']|capitalize}} {% endblock %}
+
+{% block body %}
+
+    {% if context['items'] %}
+        <ul>
+            {% for item in context['items'] %}
+                {{ macros.build_item_card(item) }}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="row justify-content-center">
+            <div class="alert alert-dark text-center" role="alert">
+                <h4 class="alert-heading">Oh No!</h4>
+                <p>We don't have any listings for this Category, use the actions below to continue</p>
+                <hr>
+                <a class="btn" href="/categories">Go Back</a>
+                <a class="btn btn-dark" href="/add-car">Add Car</a>
+            </div>
+        </div>
+    {% endif %}
+
+
+{% endblock %}

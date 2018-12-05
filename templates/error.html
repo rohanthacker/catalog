@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col col-4 alert alert-dark text-center">
+            <h1 class="h4 ">Oh No! An error occurred </h1>
+            <hr>
+            <code>
+            {{ context.error }}<br>
+            You don't have access to this action
+            </code>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+        <div class="col col-md-10">
+            <div class="card card-body">
+                <form method="POST" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+                    <div class="row justify-content-between">
+                        <div class="col col-md-8 form-group">
+                            <label for="name">Name</label>
+                            <input class="form-control" name="name" type="text" value="{{ context.object.name }}" required>
+                        </div>
+                        <div class="col col-md-3 form-group">
+                            <label for="production_year">Production Year</label>
+                            <input class="form-control" name="production_year" type="text" required>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-between">
+                        <div class="col col-md-8 form-group">
+                            <label for="category_id">Manufacture</label>
+                            <select name="category_id" class="form-control" required>
+                                {% for item in context.category_list %}
+                                <option value="{{item.id}}">
+                                    {{item.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col col-md-3 form-group">
+                            <label for="price">Price</label>
+                            <input class="form-control" name="price" type="text" value="" required>
+                        </div>
+                    </div>
+
+                <div class="row">
+                    <div class="col col-md-8">
+                        <div class="alert alert-dark">
+                            <div class="form-group">
+                                <p>Condition</p>
+                                <div class="form-check-inline">
+                                    <input type="radio" name="condition" class="form-check-input" value="used" required />
+                                    <label class="form-check-label" for="condition">Used</label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <input type="radio" name="condition" class="form-check-input" value="new" required />
+                                    <label class="form-check-label" for="condition">New</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <button class="btn btn-dark">Submit</button>
+            </form>
+            </div>
+        </div>
+    </div>

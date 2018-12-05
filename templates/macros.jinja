@@ -1,0 +1,106 @@
+{% macro build_item_card(object) -%}
+    <div class="card item-card">
+        <div class="card-body row justify-content-between">
+            <div class="col col-md-2">
+                <img class="img-fluid" src="https://images.unsplash.com/photo-1468939384230-a84579016317?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjQ0NTE1fQ&s=43ef0e731acc339fd9d6fcc19fb0bae2" alt="">
+            </div>
+            <div class="col col-md-8">
+                <h1 class="h4">{{object.name}}</h1>
+                <table class="table table-sm">
+                    <thead>
+                    <tr>
+                        <th>Condition</th>
+                        <th>Production Year</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><span class="badge {% if object.condition == 'new' %} badge-primary {% else %} badge-secondary{% endif %}">{{ object['condition'] }}</span></td>
+                        <td>{{ object['production_year'] }}</td>
+                        <td>{{ object['price'] }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+                <div class="col col-md-2 text-right">
+                <div class="dropdown">
+                {% if object['created_by'] %}
+                  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Actions
+                  </button>
+                    <div class="dropdown-menu">
+                      <h6 class="dropdown-header">Actions</h6>
+                      <a class="dropdown-item" href="/api/v1/categories/{{ object['category_id'] }}/{{ object.id }}">View as JSON</a>
+                      <a class="dropdown-item" href="/categories/{{ object.category_id}}/{{ object.id }}/edit">Edit</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="/categories/{{ object.category_id}}/{{ object.id }}/delete">Delete</a>
+                    </div>
+                </div>
+                {% else %}
+                <a class="btn btn-light" type="button">
+                    View as Json
+                  </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{%- endmacro %}
+{% macro build_item_form(context) -%}
+<div class="row justify-content-center">
+        <div class="col col-md-10">
+            <div class="card card-body">
+                <form method="POST" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+                    <div class="row justify-content-between">
+                        <div class="col col-md-8 form-group">
+                            <label for="name">Name</label>
+                            <input class="form-control" name="name" type="text" value="{{ context.object.name }}">
+                        </div>
+                        <div class="col col-md-3 form-group">
+                            <label for="production_year">Production Year</label>
+                            <input class="form-control" name="production_year" type="text" value="{{ context.object.production_year }}" required>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-between">
+                        <div class="col col-md-8 form-group">
+                            <label for="category_id">Manufacture</label>
+                            <select name="category_id" class="form-control" required>
+                                {% for item in context.category_list %}
+                                <option value="{{item.id}}" {% if item.id == context.object.category_id %} selected {% endif %}>
+                                    {{item.name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col col-md-3 form-group">
+                            <label for="price">Price</label>
+                            <input class="form-control" name="price" type="text" value="{{ context.object.price }}" required>
+                        </div>
+                    </div>
+
+                <div class="row">
+                    <div class="col col-md-8">
+                        <div class="alert alert-dark">
+                            <div class="form-group">
+                                <p>Condition</p>
+                                <div class="form-check-inline">
+                                    <input {% if context.object.condition == 'used' %} checked {% endif %} type="radio" name="condition" class="form-check-input" value="used" required />
+                                    <label class="form-check-label" for="condition">Used</label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <input {% if context.object.condition == 'new' %} checked {% endif %}" type="radio" name="condition" class="form-check-input" value="new" required />
+                                    <label class="form-check-label" for="condition">New</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <button class="btn btn-dark">Submit</button>
+            </form>
+            </div>
+        </div>
+    </div>
+{%- endmacro %}

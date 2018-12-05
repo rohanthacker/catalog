@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %} Categories {% endblock %}
+
+
+
+{% block body %}
+        <div class="grid">
+            {% for item in objects %}
+            <a href="{{item.id}}">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1468939384230-a84579016317?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjQ0NTE1fQ&s=43ef0e731acc339fd9d6fcc19fb0bae2" alt="">
+                    <div class="card-body">
+    {#                <img src="https://api.unsplash.com/photos/random/?query=car&client_id=bed2f68b05994f0e245c6e8fd178f03a79ab47323294129a1d7be08c96458367" alt="">#}
+                    <span>{{item.name}}</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %} Welcome {% endblock %}
+
+{% block body %}
+    <div class="hero">
+    <div class="hero-content">
+        <h1>Welcome R's Car Catalog</h1>
+        <div class="flex">
+            <a href="/categories" class="btn btn-light">Browse</a>
+            {% if not session.user %}
+                <a href="/login" class="btn btn-primary">Login</a>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
