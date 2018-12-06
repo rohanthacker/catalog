@@ -1,15 +1,17 @@
 #!/usr/bin/python3
 import json
+import requests
 import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
 from flask import Flask, session, redirect, request, Response
+from flask import session as a_session
+
 from catalog.session import session as db_session
-import requests
-from core.views.generic import IndexView
-from core.views.category import CategoryListView, CategoryDetailView
-from core.views.item import ItemDetailView, ItemCreateView, ItemDeleteView, ItemUpdateView, ItemListView
-from core.views.API import APIView
 from catalog.models import User
+
+from core.views.generic import IndexView
+from core.views.API import APIView
+from catalog.views import *
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -47,10 +49,8 @@ def oauth_callback():
         credentials = flow.credentials
         endpoint = g_user_endpoint.format(credentials.token)
         g_user_response = requests.get(endpoint).json()
-        session['user'] = g_user_response
-        print(session['user']['name'])
+        a_session['user'] = g_user_response
         return redirect('/categories/')
-
         # try:
         #     new_user = User(name=g_user_response['name'],
         #                     email=g_user_response['email'],

@@ -4,7 +4,11 @@
 {% block body %}
 
 {% for item in objects %}
-    {{ macros.build_item_card(item) }}
+    <div class="row">
+        <div class="col col-4">
+            {{ macros.build_item_card(item) }}
+        </div>
+    </div>
 {% endfor %}
 
 {% endblock %}

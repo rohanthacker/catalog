@@ -5,10 +5,17 @@
 
 {% block body %}
 
+    <div class="title text-center">
+        <span class="h1">{{ context.object.name }}</span>
+        <div class="badge badge-secondary">{{ context['items']|length }} Cars</div>
+        <hr>
+    </div>
     {% if context['items'] %}
-        <ul>
+        <ul class="row">
             {% for item in context['items'] %}
+                <li class="col col-4">
                 {{ macros.build_item_card(item) }}
+                </li>
             {% endfor %}
         </ul>
     {% else %}

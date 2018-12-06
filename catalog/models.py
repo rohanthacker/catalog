@@ -63,5 +63,13 @@ class Item(Base):
             production_year=self.production_year
         )
 
+    def is_owner(self, user=None):
+        if user is not None:
+            return True if self.created_by == float(user['id']) else False
+        else:
+            raise Exception
+
+
+
     def __str__(self):
         return self.name

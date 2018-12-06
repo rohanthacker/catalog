@@ -1,29 +1,24 @@
 {% macro build_item_card(object) -%}
     <div class="card item-card">
-        <div class="card-body row justify-content-between">
-            <div class="col col-md-2">
-                <img class="img-fluid" src="https://images.unsplash.com/photo-1468939384230-a84579016317?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjQ0NTE1fQ&s=43ef0e731acc339fd9d6fcc19fb0bae2" alt="">
-            </div>
-            <div class="col col-md-8">
-                <h1 class="h4">{{object.name}}</h1>
+        <img class="img-fluid" src="https://images.unsplash.com/photo-1468939384230-a84579016317?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&h=200&fit=max&ixid=eyJhcHBfaWQiOjQ0NTE1fQ&s=43ef0e731acc339fd9d6fcc19fb0bae2" alt="">
+        <div class="card-body">
+            <h1 class="h4">{{object.name}} <td><small><span class="badge {% if object.condition == 'new' %} badge-primary {% else %} badge-secondary{% endif %}">{{ object['condition'] }}</span></small></td></h1>
                 <table class="table table-sm">
                     <thead>
                     <tr>
-                        <th>Condition</th>
                         <th>Production Year</th>
                         <th>Price</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td><span class="badge {% if object.condition == 'new' %} badge-primary {% else %} badge-secondary{% endif %}">{{ object['condition'] }}</span></td>
                         <td>{{ object['production_year'] }}</td>
                         <td>{{ object['price'] }}</td>
                     </tr>
                     </tbody>
                 </table>
-                </div>
-                <div class="col col-md-2 text-right">
+            </div>
+                <div class="card-footer text-right">
                 <div class="dropdown">
                 {% if object['created_by'] %}
                   <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -44,7 +39,6 @@
                 {% endif %}
             </div>
         </div>
-    </div>
 {%- endmacro %}
 {% macro build_item_form(context) -%}
 <div class="row justify-content-center">
