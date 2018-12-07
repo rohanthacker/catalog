@@ -73,8 +73,8 @@ def oauth_callback():
 
 @app.route('/logout')
 def logout():
-    if session['user']:
-        del session['user']
+    if a_session['user'] is not None:
+        a_session['user'] = {}
         return redirect('/categories')
     else:
         return "Not Logged In"

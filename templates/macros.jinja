@@ -19,26 +19,25 @@
                 </table>
             </div>
                 <div class="card-footer text-right">
-                <div class="dropdown">
-                {% if object['created_by'] %}
-                  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Actions
-                  </button>
-                    <div class="dropdown-menu">
-                      <h6 class="dropdown-header">Actions</h6>
-                      <a class="dropdown-item" href="/api/v1/categories/{{ object['category_id'] }}/{{ object.id }}">View as JSON</a>
-                      <a class="dropdown-item" href="/categories/{{ object.category_id}}/{{ object.id }}/edit">Edit</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="/categories/{{ object.category_id}}/{{ object.id }}/delete">Delete</a>
-                    </div>
-                </div>
-                {% else %}
-                <a class="btn btn-light" type="button">
-                    View as Json
-                  </a>
+                    <a class="btn btn-light" href="/api/v1/categories/{{ object['category_id'] }}/{{ object.id }}">
+                        View as JSON
+                    </a>
+                    {% if object['created_by'] == session['user']['id'] %}
+                    <span class="dropdown">
+                      <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Actions
+                      </button>
+                        <div class="dropdown-menu">
+                          <h6 class="dropdown-header">Actions</h6>
+                          <a class="dropdown-item" href="/api/v1/categories/{{ object['category_id'] }}/{{ object.id }}">View as JSON</a>
+                          <a class="dropdown-item" href="/categories/{{ object.category_id}}/{{ object.id }}/edit">Edit</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="/categories/{{ object.category_id}}/{{ object.id }}/delete">Delete</a>
+                        </div>
+                    </span>
                 {% endif %}
-            </div>
         </div>
+     </div>
 {%- endmacro %}
 {% macro build_item_form(context) -%}
 <div class="row justify-content-center">
@@ -52,7 +51,7 @@
                         </div>
                         <div class="col col-md-3 form-group">
                             <label for="production_year">Production Year</label>
-                            <input class="form-control" name="production_year" type="text" value="{{ context.object.production_year }}" required>
+                            <input class="form-control" name="production_year" type="text" value="{{ context.object.production_year }}" >
                         </div>
                     </div>
 
@@ -70,7 +69,7 @@
 
                         <div class="col col-md-3 form-group">
                             <label for="price">Price</label>
-                            <input class="form-control" name="price" type="text" value="{{ context.object.price }}" required>
+                            <input class="form-control" name="price" type="text" value="{{ context.object.price }}" >
                         </div>
                     </div>
 

@@ -3,7 +3,6 @@ from flask.views import View
 from flask import session as a_session
 from catalog.session import session
 
-
 class TemplateView(View):
     template_name = None
     context = dict()
@@ -92,12 +91,54 @@ class DetailView(TemplateView):
 
 
 class CreateView(TemplateView):
+    model = None
+
+    def process_form(self, form, *args, **kwargs):
+        self.object.name = form['name']
+        self.object.price = form['price']
+        self.object.condition = form['condition']
+        self.object.production_year = form['production_year']
+        self.object.category_id = form['category_id']
+        session.commit()
+
+    def form_valid(self):
+        return redirect(self.redirect_url)
+
+    def form_invalid(self, **kwargs):
+        self.context['errors'] = 'ALL WRONG'
+        self.context['object'] = kwargs['form']
+        return render_template(self.template_name, context=self.context)
 
     def get_object(self, pk):
         return session.query(self.model).filter_by(id=pk).first()
 
-    def get_context(self, **kwargs):
-        self.context['object'] = self.get_object(pk=kwargs['pk'])
+
+    def create_object(self, obj):
+        _obj = obj.to_dict()
+        _obj['created_by'] = a_session['user']['id']
+        try:
+            item = self.model(**_obj)
+            session.add(item)
+            session.commit()
+            return self.form_valid()
+        except Exception as e:
+            session.rollback()
+            raise e
+
+    def dispatch_request(self, **kwargs):
+        # Process form for a POST REQUEST
+        if request.method == 'POST':
+            try:
+                return self.create_object(request.form)
+            except Exception as e:
+                raise e
+        # Display form for an authorized GET REQUEST
+        elif 'id' in a_session['user']['id']:
+            self.get_context(**kwargs)
+            return render_template(self.template_name, context=self.context)
+        # Redirect to Login
+        else:
+            return redirect('/login')
 
 
 class UpdateView(AuthorizedView, TemplateView):
@@ -116,8 +157,11 @@ class UpdateView(AuthorizedView, TemplateView):
         self.context['object'] = self.object
         # Handle Form Update
         if request.method == 'POST':
-            self.process_form(form=request.form)
-            return redirect('/categories/')
+            try:
+                self.process_form(form=request.form)
+                return redirect('/categories/')
+            except Exception as e:
+                raise e
         # Show Form to owner
         else:
             if request.method == 'GET':

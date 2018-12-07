@@ -11,7 +11,7 @@
         <hr>
     </div>
     {% if context['items'] %}
-        <ul class="row">
+        <ul class="row justify-content-center">
             {% for item in context['items'] %}
                 <li class="col col-4">
                 {{ macros.build_item_card(item) }}

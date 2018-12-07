@@ -75,3 +75,12 @@ body {
 .card.item-card table {
     margin-bottom: 0;
 }
+
+.grid .card img {
+    margin: 0 auto;
+}
+
+.grid .card {
+    padding-top: 1rem;
+    text-align: center;
+}

@@ -3,12 +3,12 @@
 
 {% block body %}
 
-{% for item in objects %}
-    <div class="row">
-        <div class="col col-4">
-            {{ macros.build_item_card(item) }}
-        </div>
-    </div>
-{% endfor %}
+<div class="row">
+    {% for item in objects %}
+            <div class="col col-4">
+                {{ macros.build_item_card(item) }}
+            </div>
+    {% endfor %}
+</div>
 
 {% endblock %}

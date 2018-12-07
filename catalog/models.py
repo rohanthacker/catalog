@@ -33,7 +33,7 @@ class Item(Base):
 
     __tablename__ = 'items'
 
-    id = Column(Integer, primary_key=True, autoincrement=True, nullable=True)
+    id = Column(Integer, primary_key=True, autoincrement=True, nullable=True, default=None)
     created_by = Column(String(255), nullable=False)
     name = Column(String(80), nullable=False)
     category_id = Column(Integer, ForeignKey("categories.id"), nullable=False)
@@ -46,7 +46,6 @@ class Item(Base):
             'id': self.id,
             'name': self.name,
             'price': self.price,
-            'created_by': self.created_by,
             'category': self.category_id,
             'condition': self.condition,
             'production_year': self.production_year
@@ -57,7 +56,6 @@ class Item(Base):
             id=self.id,
             name=self.name,
             price=self.price,
-            created_by=self.created_by,
             category=self.category_id,
             condition=self.conditiion,
             production_year=self.production_year
@@ -65,7 +63,7 @@ class Item(Base):
 
     def is_owner(self, user=None):
         if user is not None:
-            return True if self.created_by == float(user['id']) else False
+            return True if self.created_by == user['id'] else False
         else:
             raise Exception
 
