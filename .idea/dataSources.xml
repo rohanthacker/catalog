@@ -10,5 +10,11 @@
         <property name="enable_load_extension" value="true" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="catalog@139.59.63.78" uuid="4b05b751-bd18-4a8e-9563-99b8cd9b000a">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://139.59.63.78:5432/catalog</jdbc-url>
+    </data-source>
   </component>
 </project>

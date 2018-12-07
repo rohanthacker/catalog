@@ -28,106 +28,90 @@
       <Position>2</Position>
       <DataType>VARCHAR(50)|0s</DataType>
     </column>
-    <column id="13" parent="7" name="id">
+    <column id="13" parent="7" name="name">
       <Position>1</Position>
-      <DataType>INTEGER|0s</DataType>
-      <SequenceIdentity>1</SequenceIdentity>
-      <DefaultExpression>null</DefaultExpression>
-    </column>
-    <column id="14" parent="7" name="name">
-      <Position>2</Position>
       <DataType>VARCHAR(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="15" parent="7" name="created_by">
+    <column id="14" parent="7" name="created_by">
+      <Position>2</Position>
+      <DataType>INTEGER|0s</DataType>
+    </column>
+    <column id="15" parent="7" name="category_id">
       <Position>3</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="16" parent="7" name="category_id">
+    <column id="16" parent="7" name="price">
       <Position>4</Position>
-      <DataType>INTEGER|0s</DataType>
-    </column>
-    <column id="17" parent="7" name="price">
-      <Position>5</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="18" parent="7" name="condition">
-      <Position>6</Position>
+    <column id="17" parent="7" name="condition">
+      <Position>5</Position>
       <DataType>varchar(4)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>used</DefaultExpression>
     </column>
-    <column id="19" parent="7" name="production_year">
-      <Position>7</Position>
+    <column id="18" parent="7" name="production_year">
+      <Position>6</Position>
       <DataType>VARCHAR(4)|0s</DataType>
     </column>
-    <index id="20" parent="7" name="items_id_uindex">
-      <ColNames>id</ColNames>
-      <ColumnCollations></ColumnCollations>
-      <Unique>1</Unique>
-    </index>
-    <key id="21" parent="7">
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>items_id_uindex</UnderlyingIndexName>
-    </key>
-    <column id="22" parent="8" name="type">
+    <column id="19" parent="8" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="23" parent="8" name="name">
+    <column id="20" parent="8" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="24" parent="8" name="tbl_name">
+    <column id="21" parent="8" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="25" parent="8" name="rootpage">
+    <column id="22" parent="8" name="rootpage">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="26" parent="8" name="sql">
+    <column id="23" parent="8" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="27" parent="9" name="name">
+    <column id="24" parent="9" name="name">
       <Position>1</Position>
     </column>
-    <column id="28" parent="9" name="seq">
+    <column id="25" parent="9" name="seq">
       <Position>2</Position>
     </column>
-    <column id="29" parent="10" name="id">
+    <column id="26" parent="10" name="id">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="30" parent="10" name="name">
+    <column id="27" parent="10" name="name">
       <Position>2</Position>
       <DataType>VARCHAR(80)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="31" parent="10" name="email">
+    <column id="28" parent="10" name="email">
       <Position>3</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="32" parent="10" name="email_verified">
+    <column id="29" parent="10" name="email_verified">
       <Position>4</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>False</DefaultExpression>
     </column>
-    <column id="33" parent="10" name="picture">
+    <column id="30" parent="10" name="picture">
       <Position>5</Position>
       <DataType>VARCHAR(255)|0s</DataType>
     </column>
-    <index id="34" parent="10" name="users_email_uindex">
+    <index id="31" parent="10" name="users_email_uindex">
       <ColNames>email</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="35" parent="10">
+    <key id="32" parent="10">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
