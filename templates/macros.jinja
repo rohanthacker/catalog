@@ -56,11 +56,11 @@
                     <div class="row justify-content-between">
                         <div class="col col-md-8 form-group">
                             <label for="name">Name</label>
-                            <input class="form-control" name="name" type="text" value="{{ context.object.name }}">
+                            <input class="form-control" name="name" type="text" required value="{{ context.object.name }}">
                         </div>
                         <div class="col col-md-3 form-group">
                             <label for="production_year">Production Year</label>
-                            <input class="form-control" name="production_year" type="text" value="{{ context.object.production_year }}" >
+                            <input class="form-control" name="production_year" type="text" required value="{{ context.object.production_year }}" >
                         </div>
                     </div>
 
@@ -78,7 +78,7 @@
 
                         <div class="col col-md-3 form-group">
                             <label for="price">Price</label>
-                            <input class="form-control" name="price" type="text" value="{{ context.object.price }}" >
+                            <input class="form-control" name="price" type="text" value="{{ context.object.price }}" required>
                         </div>
                     </div>
 
@@ -92,7 +92,7 @@
                                     <label class="form-check-label" for="condition">Used</label>
                                 </div>
                                 <div class="form-check-inline">
-                                    <input {% if context.object.condition == 'new' %} checked {% endif %}" type="radio" name="condition" class="form-check-input" value="new" required />
+                                    <input {% if context.object.condition == 'new' %} checked {% endif %} type="radio" name="condition" class="form-check-input" value="new" required />
                                     <label class="form-check-label" for="condition">New</label>
                                 </div>
                             </div>

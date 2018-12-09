@@ -149,8 +149,9 @@ class CreateView(TemplateView):
                 return self.create_object(request.form)
             except Exception as e:
                 raise e
-        # Display form for an authorized GET REQUEST
+
         elif 'id' in a_session['user']:
+        # Display form for an authorized GET REQUEST
             self.get_context(**kwargs)
             return render_template(self.template_name, context=self.context)
         # Redirect to Login
