@@ -43,6 +43,13 @@
 {%- endmacro %}
 {% macro build_item_form(context) -%}
 <div class="row justify-content-center">
+        {% if context.error %}
+        <div class="col col-md-10">
+            <div class="alert alert-danger">
+                 {{ context.error }}
+            </div>
+        </div>
+        {% endif %}
         <div class="col col-md-10">
             <div class="card card-body">
                 <form method="POST" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
