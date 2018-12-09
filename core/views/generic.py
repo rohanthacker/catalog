@@ -123,7 +123,7 @@ class CreateView(TemplateView):
         return redirect(self.redirect_url)
 
     def form_invalid(self, **kwargs):
-        self.context['errors'] = 'Form contains Errors'
+        self.context['error'] = 'Form contains Errors'
         return render_template(self.template_name, context=self.context)
 
     def get_object(self, pk):
