@@ -123,8 +123,7 @@ class CreateView(TemplateView):
         return redirect(self.redirect_url)
 
     def form_invalid(self, **kwargs):
-        self.context['errors'] = 'ALL WRONG'
-        self.context['object'] = kwargs['form']
+        self.context['errors'] = 'Form contains Errors'
         return render_template(self.template_name, context=self.context)
 
     def get_object(self, pk):
@@ -141,7 +140,7 @@ class CreateView(TemplateView):
             return self.form_valid()
         except Exception as e:
             session.rollback()
-            raise e
+            return self.form_invalid()
 
     def dispatch_request(self, **kwargs):
         # Process form for a POST REQUEST

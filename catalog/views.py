@@ -28,7 +28,7 @@ class ItemCreateView(CreateView):
     model = Item
     methods = ['GET', 'POST']
     template_name = 'item_create.html'
-    redirect_url = 'http://localhost:5000/categories/'
+    redirect_url = '/categories/'
 
     def get_context(self, **kwargs):
         self.context['object'] = {}

@@ -26,8 +26,8 @@ flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
         ]
     )
 
-# flow.redirect_uri = 'http://catalog.thack.in/oauth-callback'
-flow.redirect_uri = 'http:/localhost:5000/oauth-callback'
+flow.redirect_uri = 'http://catalog.thack.in/oauth-callback'
+
 authorization_url, state = flow.authorization_url(
     access_type='offline',
     include_granted_scopes='true')
