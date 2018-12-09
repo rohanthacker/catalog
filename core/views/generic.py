@@ -4,6 +4,9 @@ from flask import session as a_session
 from catalog.session import session
 
 class TemplateView(View):
+    '''
+    Base view to Render a Template via template_name in the view
+    '''
     template_name = None
     context = dict()
 
@@ -22,6 +25,9 @@ class TemplateView(View):
 
 
 class RedirectView(View):
+    '''
+    Base view for when redirecting is needed
+    '''
     redirect_url = None
 
     def dispatch_request(self):
@@ -29,6 +35,9 @@ class RedirectView(View):
 
 
 class SingleObjectView(TemplateView):
+    '''
+    Base View for Views, dealing with one object in its lifecycle.
+    '''
     model = None
     object = None
 
@@ -40,7 +49,9 @@ class SingleObjectView(TemplateView):
 
 
 class AuthorizedView(SingleObjectView):
-
+    '''
+    Check for if user is the owner, restricted views must sub-class this class.
+    '''
     def check_permissions(self):
         user = a_session.get('user')
         if user and self.object.is_owner(user):
@@ -63,6 +74,9 @@ class IndexView(TemplateView):
 
 
 class ListView(TemplateView):
+    '''
+    Base view for displaying a list of items.
+    '''
     model = None
 
     def get_objects(self):
@@ -81,6 +95,9 @@ class ListView(TemplateView):
 
 
 class DetailView(TemplateView):
+    '''
+    Base View for displaying one item in a template
+    '''
     model = None
 
     def get_object(self, pk):
@@ -91,6 +108,7 @@ class DetailView(TemplateView):
 
 
 class CreateView(TemplateView):
+    ''' Base View for creating an item '''
     model = None
 
     def process_form(self, form, *args, **kwargs):
@@ -142,6 +160,9 @@ class CreateView(TemplateView):
 
 
 class UpdateView(AuthorizedView, TemplateView):
+    '''
+    Base View for updating an item
+    '''
 
     def process_form(self, form, *args, **kwargs):
         self.object.name = form['name']
@@ -174,6 +195,7 @@ class UpdateView(AuthorizedView, TemplateView):
 
 
 class DeleteView(AuthorizedView):
+    ''' Base View for deleteing and Item '''
     redirect_url = None
 
     def delete_object(self):

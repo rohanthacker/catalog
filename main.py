@@ -10,8 +10,8 @@ from catalog.session import session as db_session
 from catalog.models import User
 
 from core.views.generic import IndexView
-from core.views.API import APIView
 from catalog.views import *
+from catalog.API import APIView
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -32,7 +32,7 @@ flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
         ]
     )
 
-flow.redirect_uri = 'http://localhost:5000/oauth-callback'
+flow.redirect_uri = 'http://catalog.thack.in/oauth-callback'
 authorization_url, state = flow.authorization_url(
     access_type='offline',
     include_granted_scopes='true')
@@ -51,24 +51,6 @@ def oauth_callback():
         g_user_response = requests.get(endpoint).json()
         a_session['user'] = g_user_response
         return redirect('/categories/')
-        # try:
-        #     new_user = User(name=g_user_response['name'],
-        #                     email=g_user_response['email'],
-        #                     email_verified=g_user_response['verified_email'])
-        #     db_session.add(new_user)
-        #     db_session.commit()
-        #     db_session.close()
-        # except Exception as err:
-        #     return Response(err)
-        # print({
-        #     'token': credentials.token,
-        #     'refresh_token': credentials.refresh_token,
-        #     'token_uri': credentials.token_uri,
-        #     'client_id': credentials.client_id,
-        #     'client_secret': credentials.client_secret,
-        #     'scopes': credentials.scopes
-        # })
-
 
 
 @app.route('/logout')

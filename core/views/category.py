@@ -4,14 +4,13 @@ from catalog.models import Category, Item
 
 
 class CategoryListView(ListView):
+    # Display Category list through generic list view
     model = Category
     template_name = 'category_list.html'
 
-    # def get_objects(self):
-    #     return session.query(Category).distinct().order_by('name')
-
 
 class CategoryDetailView(DetailView):
+    # Display a categories items generic detail view
     model = Category
     template_name = 'category_detail.html'
 
