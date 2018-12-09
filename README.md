@@ -25,6 +25,9 @@ Clone Source Code
 
 * Python3 
     `apt install python3 python3-pip`
+    
+* Python dependencies
+    `pip3 install -r requirements.txt`
 
 * Postgres
     `apt install postgresql`
@@ -33,10 +36,12 @@ Clone Source Code
     `apt install gunicorn`
     
 * Setup Database
-    `postgres`
+    Used the SQL Create statements in Tables.sql to created the required tables.
+    * Remember to also create users and grant the required access.*
     
 * Run Server with 
-    `EXPORT FLASK_APP=main.py`
-    `flask run`
+    `gunicorn -D -b 0.0.0.0:80 wsgi:app`
 
 ___
+
+

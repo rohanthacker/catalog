@@ -1,14 +1,11 @@
 #!/usr/bin/python3
-import json
+import os
 import requests
 import google_auth_oauthlib.flow
-from googleapiclient.discovery import build
-from flask import Flask, session, redirect, request, Response
-from flask import session as a_session
 
-from catalog.session import session as db_session
-from catalog.models import User
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
+from flask import Flask
 from core.views.generic import IndexView
 from catalog.views import *
 from catalog.API import APIView
@@ -19,9 +16,6 @@ app.config["DEBUG"] = True
 
 g_user_endpoint = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token={}'
 
-# For Testing
-import os
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
     'google_oauth_secrets.json',
@@ -32,7 +26,8 @@ flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
         ]
     )
 
-flow.redirect_uri = 'http://catalog.thack.in/oauth-callback'
+# flow.redirect_uri = 'http://catalog.thack.in/oauth-callback'
+flow.redirect_uri = 'http:/localhost:5000/oauth-callback'
 authorization_url, state = flow.authorization_url(
     access_type='offline',
     include_granted_scopes='true')
@@ -96,3 +91,6 @@ app.add_url_rule('/categories/<category_pk>/<pk>/edit',
 # API Routes
 app.add_url_rule(
     '/api/v1/categories/<category_pk>/<pk>', view_func=APIView.as_view('api_list_categories'))
+
+
+
