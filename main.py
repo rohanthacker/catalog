@@ -3,7 +3,6 @@ import os
 import requests
 import google_auth_oauthlib.flow
 
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 from flask import Flask
 from core.views.generic import IndexView
@@ -26,12 +25,10 @@ flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
         ]
     )
 
-# flow.redirect_uri = 'http://catalog.thack.in/oauth-callback'
-flow.redirect_uri = 'http://localhost:5000/oauth-callback'
+HOSTNAME = 'catalog.thack.in' if app.env == 'production' else 'localhost:5000'
 
-authorization_url, state = flow.authorization_url(
-    access_type='offline',
-    include_granted_scopes='true')
+flow.redirect_uri = 'http://{}/oauth-callback'.format(HOSTNAME)
+authorization_url, state = flow.authorization_url(access_type='offline', include_granted_scopes='true')
 
 
 @app.route('/login')
@@ -94,4 +91,5 @@ app.add_url_rule(
     '/api/v1/categories/<category_pk>/<pk>', view_func=APIView.as_view('api_list_categories'))
 
 
-
+if __name__ == "__main__":
+    os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
