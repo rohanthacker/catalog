@@ -21,7 +21,9 @@ Clone Source Code
 * Python dependencies
     `pip3 install -r requirements.txt`
     
-* Database Setup
+ 
+ **Skip the next step, if you cloned this repo via git** 
+* Database Setup 
     * Create a file called `catalog.db` in the project root.     
     * Use the SQL Create statements in `fixtures.SQL` to created the required tables.
     * Load Category Items from `fixtures.SQL`'
